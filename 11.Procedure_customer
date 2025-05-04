@@ -1,0 +1,33 @@
+-- customer_procedure.sql
+
+CREATE DATABASE o;
+USE o;
+
+CREATE TABLE customer (
+    c_id INT AUTO_INCREMENT PRIMARY KEY,
+    c_name VARCHAR(50),
+    c_email VARCHAR(100),
+    city VARCHAR(50)
+);
+
+INSERT INTO customer(c_id, c_name, c_email, city) VALUES
+(1, 'ved', 'op@gmail.com', 'pune'),
+(2, 'kush', 'ku@gmial.com', 'guj');
+
+SELECT * FROM customer;
+
+DELIMITER //
+CREATE PROCEDURE ans(
+    IN pc_name VARCHAR(50),
+    IN pc_email VARCHAR(100),
+    IN pcity VARCHAR(50)
+)
+BEGIN
+    INSERT INTO customer(c_name, c_email, city)
+    VALUES (pc_name, pc_email, pcity);
+
+    SELECT * FROM customer;
+END//
+DELIMITER ;
+
+CALL ans('bhava', 'b@gmail.com', 'goa');
