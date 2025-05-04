@@ -1,0 +1,61 @@
+create database l;
+
+use l;
+
+create table employee(
+eid int primary key,
+ename varchar(50),
+ecity varchar(50),
+salary decimal(10,2),
+did int
+);
+create table dept(
+did int primary key,
+dname varchar (50),
+location varchar(50)
+);
+
+insert into employee(eid,ename,ecity,salary,did) values
+(101, 'Vedant', 'Pune', 45000, 1),
+(102, 'Meera', 'Mumbai', 38000, 2),
+(103, 'Rohan', 'Delhi', 52000, 3),
+(104, 'Mansi', 'Pune', 25000, 1),
+(105, 'Karan', 'Bangalore', 19000, 4),
+(106, 'Arjun', 'Chennai', 30000, 3);
+
+insert into dept(did,dname,location) values
+(1, 'IT', 'Pune'),
+(2, 'HR', 'Mumbai'),
+(3, 'Finance', 'Delhi'),
+(4, 'Sales', 'Bangalore');
+
+select * from employee;
+
+select * from dept;
+
+select d.dname,avg(e.salary) as ans
+from employee e
+join dept d on d.did=e.did
+where dname='it'
+group by d.dname;
+
+update dept
+set location='Dubai'
+where dname='it';
+select*from dept;
+
+select * from employee
+where salary between 40000 and 500000;
+
+select e.ename 
+from employee e
+join dept d on d.did=e.did
+where dname='it';
+
+-- subqueries;
+
+select ename from employee
+where did=(select did from dept 
+where dname='it');
+
+
