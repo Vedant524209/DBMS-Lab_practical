@@ -1,0 +1,56 @@
+-- Create the database
+CREATE DATABASE library;
+
+-- Use the database
+USE library;
+
+-- Create a table
+CREATE TABLE books (
+    book_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    quantity INT
+);
+
+-- Insert data
+INSERT INTO books (title, author, quantity) VALUES
+('Wings of Fire', 'A. P. J. Abdul Kalam', 5),
+('The Alchemist', 'Paulo Coelho', 10),
+('1984', 'George Orwell', 7);
+
+-- ✅ This will work in safe mode
+UPDATE books SET quantity = 20 WHERE book_id = 1;
+
+
+-- Delete a record
+DELETE FROM books WHERE book_id=2;
+
+-- Select data
+SELECT * FROM books;
+
+
+DELIMITER //
+
+CREATE TRIGGER check_book_quantity
+BEFORE INSERT ON books
+FOR EACH ROW
+BEGIN
+    IF NEW.quantity < 1 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Quantity must be at least 1';
+    END IF;
+END//
+
+DELIMITER ;
+
+-- This will fail due to quantity < 1
+INSERT INTO books (title, author, quantity)
+VALUES ('Invisible Book', 'Unknown', 0);
+
+-- ✅ This will succeed
+INSERT INTO books (title, author, quantity)
+VALUES ('Think and Grow Rich', 'Napoleon Hill', 3);
+
+select * from books;
+
+
