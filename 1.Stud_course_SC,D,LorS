@@ -1,0 +1,50 @@
+create database l;
+
+use l;
+
+create table course(
+c_id int primary key,
+c_name varchar (40),
+duaration int
+);
+
+create table student(
+rno int primary key,
+s_name varchar(50),
+s_city varchar(50),
+c_id int
+);
+
+insert into course(c_id,c_name,duaration)values
+(101, 'Computer Science', 3),
+(102, 'Data Science', 2),
+(103, 'Mechanical Engineering', 4),
+(104, 'Civil Engineering', 4);
+
+
+insert into student (rno,s_name,s_city,c_id) values
+(1, 'Mohit', 'Pune', 101),
+(2, 'Meera', 'Mumbai', 102),
+(3, 'Rohan', 'Nashik', 103),
+(4, 'Maya', 'Nagpur', 101),
+(5, 'Arjun', 'Delhi', 104),
+(6, 'Manish', 'Pune', 102);
+
+SELECT * FROM STUDENT;
+SELECT * FROM COURSE;
+
+select c.c_name,count(*) as ans
+from student s
+join course c on s.c_id=c.c_id
+where c.c_name='computer science'
+group by c.c_name;
+
+update course 
+set duaration=duaration+2
+where c_name='computer science';
+
+select * from course;
+
+select * from student
+where s_name like 'M%';
+
