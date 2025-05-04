@@ -1,0 +1,55 @@
+CREATE DATABASE CompanyDB;
+USE CompanyDB;
+
+CREATE TABLE DEPT (
+    dId INT PRIMARY KEY,
+    Dname VARCHAR(100),
+    location VARCHAR(100)
+);
+
+CREATE TABLE EMPLOYEE (
+    eid INT PRIMARY KEY,
+    e_name VARCHAR(100),
+    e_city VARCHAR(100),
+    salary INT,
+    dId INT,
+    FOREIGN KEY (dId) REFERENCES DEPT(dId)
+);
+
+-- Insert departments
+INSERT INTO DEPT (dId, Dname, location) VALUES
+(1, 'IT', 'Pune'),
+(2, 'HR', 'Mumbai'),
+(3, 'Sales', 'Delhi');
+
+-- Insert employees
+INSERT INTO EMPLOYEE (eid, e_name, e_city, salary, dId) VALUES
+(101, 'Rohit', 'Pune', 45000, 1),
+(102, 'Sanjay', 'Delhi', 52000, 2),
+(103, 'Kartik', 'Mumbai', 20000, 1),
+(104, 'Neha', 'Nashik', 30000, 3),
+(105, 'Ritik', 'Pune', 50000, 1),
+(106, 'Ravi', 'Delhi', 18000, 2);
+
+select * from employee;
+select * from dept;
+
+SELECT Dname, AVG(salary) AS avg_salary
+FROM EMPLOYEE
+JOIN DEPT ON EMPLOYEE.dId = DEPT.dId
+WHERE Dname = 'IT'
+GROUP BY Dname;
+
+SELECT * FROM EMPLOYEE
+WHERE e_name LIKE '%K';
+
+
+SELECT e_name
+FROM EMPLOYEE
+JOIN DEPT ON EMPLOYEE.dId = DEPT.dId
+WHERE Dname = 'IT'
+ORDER BY e_name DESC;
+
+
+
+
