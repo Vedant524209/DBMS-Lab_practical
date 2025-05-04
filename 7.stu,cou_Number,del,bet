@@ -47,3 +47,8 @@ select * from student;
 
 select * from course
 where duration between 2 and 5;
+
+SELECT c.C_name
+FROM STUDENT s
+JOIN COURSE c ON s.C_id = c.C_id
+WHERE s.S_name = 'ABC';
