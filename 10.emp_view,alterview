@@ -1,0 +1,41 @@
+CREATE DATABASE Co;
+USE Co;
+
+
+CREATE TABLE employee (
+    eid INT PRIMARY KEY,
+    e_name VARCHAR(100),
+    e_city VARCHAR(100),
+    salary INT
+);
+
+INSERT INTO employee (eid, e_name, e_city, salary) VALUES
+(1, 'Vedant', 'Pune', 50000),
+(2, 'Kavya', 'Mumbai', 60000),
+(3, 'Amit', 'Delhi', 45000),
+(4, 'Ritika', 'Nashik', 55000);
+
+
+create view ans as 
+select eid,e_name,salary
+from employee
+order by e_name desc;
+
+select * from ans;
+
+alter table employee add column email varchar(50);
+
+UPDATE employee SET email = 'vedant@example.com' WHERE eid = 1;
+UPDATE employee SET email = 'kavya@example.com' WHERE eid = 2;
+UPDATE employee SET email = 'amit@example.com' WHERE eid = 3;
+UPDATE employee SET email = 'ritika@example.com' WHERE eid = 4;
+
+
+drop view ans;
+
+create view ans as
+select eid,e_name,salary,email
+from employee
+order by e_name desc;
+
+select * from ans;
