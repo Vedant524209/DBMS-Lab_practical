@@ -1,0 +1,48 @@
+CREATE DATABASE Coa;
+USE Coa;
+
+CREATE TABLE publishing_house (
+    PId INT PRIMARY KEY,
+    Pname VARCHAR(100),
+    location VARCHAR(100)
+);
+
+-- Create book table with foreign key referencing publishing_house
+CREATE TABLE book (
+    bid INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    price DECIMAL(10, 2),
+    PId INT,
+    FOREIGN KEY (PId) REFERENCES publishing_house(PId)
+);
+
+INSERT INTO publishing_house (PId, Pname, location) VALUES
+(1, 'TechBooks', 'Mumbai'),
+(2, 'EduWorld', 'Delhi'),
+(3, 'LearnEasy', 'Pune');
+
+INSERT INTO book (bid, title, author, price, PId) VALUES
+(101, 'DBMS', 'Navathe', 450, 1),
+(102, 'Operating Systems', 'Silberschatz', 600, 2),
+(103, 'Data Structures', 'Lipschutz', 350, 1),
+(104, 'Computer Networks', 'Tanenbaum', 500, 3),
+(105, 'C Programming', 'Dennis Ritchie', 200, 3);
+
+UPDATE publishing_house
+SET location = 'Bangalore'
+WHERE Pname = 'EduWorld';
+
+DELETE FROM book
+WHERE title = 'C Programming';
+
+SELECT * FROM book
+WHERE price BETWEEN 200 AND 500;
+
+SELECT ph.Pname
+FROM publishing_house ph
+JOIN book b ON ph.PId = b.PId
+WHERE b.title = 'DBMS';
+
+
+
