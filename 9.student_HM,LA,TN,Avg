@@ -1,0 +1,30 @@
+CREATE DATABASE Com;
+USE Com;
+create table student(
+rollno int primary key,
+name varchar(50),
+math_marks INT,
+dbms_marks INT,
+attendance INT
+);
+
+INSERT INTO student (rollno, name, math_marks, dbms_marks, attendance) VALUES
+(1, 'Vedant', 85, 88, 90),
+(2, 'Kavya', 95, 91, 85),
+(3, 'Aman', 72, 68, 80),
+(4, 'Riya', 95, 76, 70),
+(5, 'Mihir', 60, 84, 60);
+
+select * from student
+where math_marks=(select max(math_marks)from student);
+
+select * from student
+where attendance=(select Min(attendance)from student);
+
+select count(*) as total 
+from student;
+
+select avg(dbms_marks) as avgerage 
+from student;
+
+
