@@ -1,0 +1,36 @@
+create database g;
+
+use g;
+
+create table employee(
+e_id int auto_increment primary key,
+e_name varchar(50),
+e_dept varchar(100),
+e_salary decimal(10,2),
+e_city varchar(40)
+);
+
+insert into employee(e_name,e_dept,e_salary,e_city) values
+('ved','HR',80000,'pune'),
+('nohal','devolper',60000,'pune'),
+('mi','emp',70000,'delhi');
+
+select * from employee;
+
+DELIMITER //
+
+create procedure ans()
+begin 
+     declare max_sal decimal(10,2);
+	
+    select MAX(e_salary)into max_sal from employee;
+    
+    select * from employee 
+    where e_salary=max_sal;
+    
+end //
+
+delimiter ;
+
+
+call ans();    
