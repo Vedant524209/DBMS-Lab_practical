@@ -1,0 +1,40 @@
+
+
+CREATE DATABASE SchoolDB;
+USE SchoolDB;
+
+CREATE TABLE Student (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    marks INT,
+    age INT
+);
+
+INSERT INTO Student (id, name, marks, age) VALUES
+(1, 'Vedant', 85, 20),
+(2, 'Mira', 72, 21),
+(3, 'Rohan', 91, 19),
+(4, 'Sara', 60, 20),
+(5, 'Kunal', 75, 22);
+
+select * from student;
+
+select name ,marks+10 as total_marks,age from student;
+
+update student 
+set marks=marks+10;
+
+select * from student;
+
+select name,sum(marks) as total
+from student
+group by name;
+
+SELECT AVG(age) AS average_age FROM Student;
+egate
+SELECT MAX(marks) AS highest_marks FROM Student;
+
+
+
+
+
