@@ -1,0 +1,49 @@
+create database cg;
+
+use cg;
+
+
+CREATE TABLE COURSE (
+    C_id INT PRIMARY KEY,
+    C_name VARCHAR(100),
+    Duration INT
+);
+
+CREATE TABLE STUDENT (
+    Rno INT PRIMARY KEY,
+    S_name VARCHAR(100),
+    S_city VARCHAR(100),
+    C_id INT
+    
+);
+
+-- Insert courses
+INSERT INTO COURSE (C_id, C_name, Duration) VALUES
+(1, 'Mathematics', 3),
+(2, 'Physics', 4),
+(3, 'Computer Science', 2),
+(4, 'Biology', 5);
+
+-- Insert students
+INSERT INTO STUDENT (Rno, S_name, S_city, C_id) VALUES
+(101, 'Vedant', 'Pune', 1),
+(102, 'Kavya', 'Mumbai', 2),
+(103, 'Rohit', 'Delhi', 1),
+(104, 'Meera', 'Pune', 3),
+(105, 'Karan', 'Nashik', 4);
+
+select * from student;
+select * from course;
+
+select c.c_name,count(s.s_name) as ans
+from student s 
+join course c on c.c_id=s.c_id
+ where c.c_name='Mathematics'
+group by c.c_name; 
+
+delete from student 
+where s_city='pune';
+select * from student;
+
+select * from course
+where duration between 2 and 5;
