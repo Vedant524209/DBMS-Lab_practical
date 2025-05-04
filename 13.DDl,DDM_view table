@@ -1,0 +1,54 @@
+CREATE DATABASE Cioa;
+USE Cioa;
+
+CREATE TABLE dit (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    city VARCHAR(100),
+    marks INT
+);
+
+ALTER TABLE dit ADD email VARCHAR(100);
+
+RENAME TABLE dit TO dit_students;
+
+TRUNCATE TABLE dit_students;
+
+DROP TABLE IF EXISTS dit_students;
+
+select * from dit_students;
+
+CREATE TABLE dit1 (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    city VARCHAR(100),
+    marks INT,
+    email VARCHAR(100)
+);
+
+INSERT INTO dit1 (id, name, city, marks, email) VALUES
+(1, 'Vedant', 'Pune', 88, 'vedant@college.com'),
+(2, 'Riya', 'Mumbai', 92, 'riya@college.com'),
+(3, 'Karan', 'Nashik', 76, 'karan@college.com');
+
+
+UPDATE dit1
+SET marks = 95
+WHERE name = 'Riya';
+
+DELETE FROM dit1
+WHERE id = 3;
+
+SELECT * FROM dit1;
+
+create view ans as
+select * from dit1;
+
+select * from ans;
+
+
+
+
+
+
+
