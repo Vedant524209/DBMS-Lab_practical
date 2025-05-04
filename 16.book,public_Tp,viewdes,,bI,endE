@@ -1,0 +1,59 @@
+CREATE DATABASE Cioa;
+USE Cioa;
+
+CREATE TABLE publishing_house (
+    PId INT PRIMARY KEY,
+    Pname VARCHAR(100),
+    location VARCHAR(100)
+);
+
+-- Create book table with foreign key referencing publishing_house
+CREATE TABLE book (
+    bid INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    price DECIMAL(10, 2),
+    PId INT,
+    FOREIGN KEY (PId) REFERENCES publishing_house(PId)
+);
+
+INSERT INTO publishing_house (PId, Pname, location) VALUES
+(101, 'Pearson', 'Mumbai'),
+(102, 'McGraw Hill', 'Delhi'),
+(103, 'Oxford', 'Pune'),
+(104, 'Cambridge', 'Bangalore');
+
+INSERT INTO book (bid, title, author, price, PId) VALUES
+(1, 'Database Systems', 'Navathe', 500, 101),
+(2, 'Operating Systems', 'Silberschatz', 600, 102),
+(3, 'Data Structures', 'Lipschutz', 450, 101),
+(4, 'Computer Networks', 'Tanenbaum', 550, 103),
+(5, 'AI Foundations', 'Russell', 700, 104);
+
+
+SELECT ph.Pname, SUM(b.price) AS total_price
+FROM publishing_house ph
+JOIN book b ON ph.PId = b.PId
+WHERE ph.Pname = 'ABC Publishers' -- Replace with actual name
+GROUP BY ph.Pname;
+
+
+CREATE VIEW book_view AS
+SELECT bid, title, author, price
+FROM book
+ORDER BY title DESC;
+
+INSERT INTO book (bid, title, author, price, PId) VALUES
+(1, 'Database Systems', 'Navathe', 500, 101),
+(2, 'Operating Systems', 'Silberschatz', 600, 102),
+(3, 'Data Structures', 'Lipschutz', 450, 101),
+(4, 'Networks', 'Tanenbaum', 550, 103);
+
+INSERT INTO publishing_house (PId, Pname, location) VALUES
+(101, 'Pearson', 'Mumbai'),
+(102, 'McGraw Hill', 'Delhi'),
+(103, 'Oxford', 'Pune');
+
+SELECT * FROM publishing_house
+WHERE Pname LIKE '%E';
+
