@@ -1,0 +1,50 @@
+create database w;
+
+use w;
+
+create table course(
+c_id int primary key,
+c_name varchar (40),
+duaration int
+);
+
+create table student(
+rno int primary key,
+s_name varchar(50),
+s_city varchar(50),
+c_id int
+);
+
+insert into course(c_id,c_name,duaration)values
+(101, 'Computer Science', 3),
+(102, 'Data Science', 2),
+(103, 'Mechanical Engineering', 4),
+(104, 'Civil Engineering', 4);
+
+
+insert into student (rno,s_name,s_city,c_id) values
+(1, 'Mohit', 'Pune', 101),
+(2, 'Meera', 'Mumbai', 102),
+(3, 'Rohan', 'Nashik', 103),
+(4, 'Maya', 'Nagpur', 101),
+(5, 'Arjun', 'Delhi', 104),
+(6, 'Manish', 'Pune', 102);
+
+select * from student ;
+ select * from course;
+ 
+ delete from student where s_city='pune';
+ 
+ select * from course where duaration between 2 and 5;
+ 
+ create view  abc as
+ select * from course 
+ where duaration=2;
+ 
+ select * from abc;
+ 
+ select c.c_name
+ from student s 
+ join course c on c.c_id=s.c_id
+ where s.s_name='Mohit';
+
