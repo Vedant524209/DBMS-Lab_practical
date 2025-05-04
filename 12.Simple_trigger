@@ -1,0 +1,36 @@
+create database a;
+
+use a;
+
+create table stud(
+s_id int auto_increment primary key,
+s_name varchar (50),
+age int
+);
+
+DELIMITER // 
+
+create trigger ans
+before insert on stud
+for each row 
+begin
+     if new.age<18 then
+	 signal sqlstate '45000'
+     set message_text='student age is less';
+     end if;
+     
+
+end//
+
+
+
+DELIMITER ;
+
+insert into stud(s_name,age)
+values('ved',20);
+
+insert into stud(s_name,age)
+values('ved',10);
+
+select * from stud;
+
